@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/llccing-demo/cube-demo/issues"
   },
-  "homepage": "https://github.com/llccing-demo/cube-demo#readme"
+  "homepage": "https://github.com/llccing-demo/cube-demo#readme",
+  "devDependencies": {
+    "lerna": "^3.19.0"
+  }
 }
