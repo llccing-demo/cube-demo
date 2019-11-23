@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Cube from 'cube-ui'
-Vue.use(Cube)
 import HelloWorld from '@/components/HelloWorld'
+Vue.use(Cube)
 
 describe('HelloWorld.vue', () => {
   it('should render correct contents', () => {

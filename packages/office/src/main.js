@@ -53,6 +53,8 @@ import {
 import App from './App'
 import router from './router'
 
+import axios from 'axios'
+
 Vue.use(Button)
 Vue.use(Loading)
 Vue.use(Tip)
@@ -93,6 +95,8 @@ Vue.use(ScrollNavBar)
 Vue.use(RecycleList)
 
 Vue.config.productionTip = false
+
+Vue.prototype.$axios = axios
 
 /* eslint-disable no-new */
 new Vue({
