@@ -1,6 +1,6 @@
 <template>
   <div class="drawer-wrapper">
-    <div class="drawer-header">
+    <div class="drawer-header" :class="{active: show}">
       <img class="logo" src="../../assets/cnodejs_light.svg" alt />
     </div>
     <div class="drawer-body">
@@ -38,6 +38,9 @@
 
 <script>
 export default {
+  props: {
+    show: Boolean
+  },
   data () {
     return {
       menuData: [
@@ -60,16 +63,13 @@ export default {
   height 100vh
   background-color #fff
   width 270px
-  box-shadow 0 4px 16px 0 rgba(0,0,0,0.12)
-  // transition all .3s linear 0s
-  // display none
   .drawer-header
     background-color #444
     height 40px
     padding 5px
     box-sizing border-box
     // 此处为了展示上 压在侧边栏上
-    margin-right -1px
+    // margin-right -1px
     .logo
       height 100%
   .drawer-body
@@ -95,4 +95,6 @@ export default {
           display block
           padding 12px 16px
           color #222
+.drawer-wrapper.active
+  box-shadow 0 4px 16px 0 rgba(0,0,0,0.12)
 </style>

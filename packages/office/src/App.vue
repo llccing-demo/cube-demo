@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Drawer class="drawer" :class="{active: show}"></Drawer>
+    <Drawer class="drawer" :show="show" :class="{active: show}"></Drawer>
     <router-view class="content-box" :class="{'hide-drawer': !show}" />
   </div>
 </template>
