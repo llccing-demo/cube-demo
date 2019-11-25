@@ -14,7 +14,7 @@ export default new Router({
       component: Home,
       children: [{
         path: 'list/:type',
-        name: 'List',
+        name: 'list',
         component: list
       }, {
         path: 'detail/:id',

@@ -1,5 +1,5 @@
 <template>
-  <div class="drawer-wrapper" v-if="value">
+  <div class="drawer-wrapper">
     <div class="drawer-header">
       <img class="logo" src="../../assets/cnodejs_light.svg" alt />
     </div>
@@ -13,7 +13,8 @@
         <div class="menu-group">
           <div class="menu-group-title">板块</div>
           <div class="menu-item" v-for="(item) in menuData" :key="item.title">
-            <a href class="menu-item-link">{{item.title}}</a>
+            <a href="" class="menu-item-link">{{item.title}}</a>
+            <router-link :to="{name: 'list', params: {type: item.type}}"></router-link>
             <i class="cubeic-arrow"></i>
           </div>
         </div>
@@ -37,18 +38,15 @@
 
 <script>
 export default {
-  props: {
-    value: Boolean
-  },
   data () {
     return {
       menuData: [
-        {link: '', title: '全部'},
-        {link: '', title: '精华'},
-        {link: '', title: '分享'},
-        {link: '', title: '问答'},
-        {link: '', title: '招聘'},
-        {link: '', title: '客户端测试'}
+        {type: 'all', title: '全部'},
+        {type: 'good', title: '精华'},
+        {type: 'share', title: '分享'},
+        {type: 'ask', title: '问答'},
+        {type: 'job', title: '招聘'},
+        {type: 'dev', title: '客户端测试'}
       ]
     }
   }

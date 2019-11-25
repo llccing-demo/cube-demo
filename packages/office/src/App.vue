@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <transition name="bounce">
-      <Drawer v-model="show"></Drawer>
-    </transition>
-    <router-view />
+    <Drawer class="drawer" :class="{active: show}"></Drawer>
+    <router-view class="content-box" :class="{'hide-drawer': !show}" />
   </div>
 </template>
 
@@ -31,21 +29,18 @@ export default {
 #app
   font-size 14px
   height 100vh
-  display flex
-
-  .bounce-enter-active
-    animation bounce-in 1s
-  .bounce-leave-to
-    animation bounce-out 1s
-
-  @keyframes bounce-in 
-    0% 
-      transform translateX(-270px)
-    100% 
-      transform translateX(0px)
-  @keyframes bounce-out
-    0% 
-      transform translateX(0)
-    100% 
-      transform translateX(-270px)
+  .drawer
+    position fixed
+    top 0
+    bottom 0
+    left -270px
+    transition all .3s ease-in-out
+  .drawer.active
+    left 0
+  .content-box
+    position absolute
+    left 270px
+    transition all .3s ease-in-out
+  .hide-drawer
+    left 0
 </style>
