@@ -1,27 +1,20 @@
 <template>
   <div id="app">
-    <Drawer class="drawer" :show="show" :class="{active: show}"></Drawer>
-    <router-view class="content-box" :class="{'hide-drawer': !show}" />
+    <Drawer class="drawer" :class="{ active: drawerOpen }"></Drawer>
+    <router-view class="content-box" :class="{ 'hide-drawer': !drawerOpen }" />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Drawer from './components/Drawer'
-import Bus from './Bus'
 export default {
   name: 'app',
   components: {
     Drawer
   },
-  data () {
-    return {
-      show: false
-    }
-  },
-  mounted () {
-    Bus.$on('toggle-drawer', (v) => {
-      this.show = v
-    })
+  computed: {
+    ...mapState(['drawerOpen'])
   }
 }
 </script>

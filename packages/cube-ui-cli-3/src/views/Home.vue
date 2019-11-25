@@ -1,18 +1,53 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <nav-bar :title="TYPE_NAME[title]">
+      <div slot="left" class="navbar-left" @click="toggleDrawer">
+        <img class="logo" src="../assets/menu.svg" alt />
+      </div>
+    </nav-bar>
+    <router-view />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import NavBar from '@/components/NavBar'
+import { TYPE_NAME } from '@/common'
 export default {
-  name: 'home',
+  data() {
+    return {
+      title: '顶部栏',
+      showDrawer: false,
+      TYPE_NAME
+    }
+  },
+  methods: {
+    toggleDrawer() {
+      this.$store.commit('toggleDrawer')
+    }
+  },
+  watch: {
+    '$route.params.type': {
+      handler(v) {
+        this.title = v
+      },
+      deep: true,
+      immediate: true
+    }
+  },
   components: {
-    HelloWorld
+    NavBar
   }
 }
 </script>
+
+<style lang="stylus">
+.navbar-left
+  line-height 46px
+  display flex
+  justify-content center
+  align-items center
+  img
+    width 30px
+.navbar-left:active
+  background-color #f2f3f5
+</style>

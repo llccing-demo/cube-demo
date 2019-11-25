@@ -7,29 +7,29 @@
             class="scroll-box-item"
             data-touch="true"
             v-for="item in items"
-            :key="item.id"
+            :key="`type_${item.id}`"
             @click="toDetail(item)"
           >
             <div class="item-header">
-              <span v-if="item.tab" class="tab" :class="[`tab-${item.tab}`]">{{item.tab}}</span>
-              <h3>{{item.title}}</h3>
+              <span v-if="item.tab" class="tab" :class="[`tab-${item.tab}`]">{{ item.tab }}</span>
+              <h3>{{ item.title }}</h3>
             </div>
 
             <div class="item-body">
               <div class="item-body-left">
                 <img class="item-body-avatar" :src="item.author.avatar_url" alt="头像" />
                 <div class="author-info">
-                  <span class="author-name">{{item.author.loginname}}</span>
-                  <span class="author-create">{{item.create_at_format}}</span>
+                  <span class="author-name">{{ item.author.loginname }}</span>
+                  <span class="author-create">{{ item.create_at_format }}</span>
                 </div>
               </div>
 
               <div class="item-body-right">
                 <div class="body-right-count">
-                  <span class="reply-count">{{item.reply_count}}</span>
-                  <span class="visit-count">{{item.visit_count}}</span>
+                  <span class="reply-count">{{ item.reply_count }}</span>
+                  <span class="visit-count">{{ item.visit_count }}</span>
                 </div>
-                <div class="body-right-reply-time">{{item.last_reply_at_format}}</div>
+                <div class="body-right-reply-time">{{ item.last_reply_at_format }}</div>
               </div>
             </div>
           </div>
@@ -42,7 +42,7 @@
 <script>
 import { moment } from '@/common'
 export default {
-  data () {
+  data() {
     return {
       type: this.$route.params.type,
       items: [],
@@ -61,7 +61,7 @@ export default {
     }
   },
   methods: {
-    async getList (isRefresh) {
+    async getList(isRefresh) {
       const toast = this.$createToast({
         txt: 'Loading...',
         mask: true,
@@ -84,14 +84,14 @@ export default {
     },
 
     // 下拉加载
-    onPullingUp () {
+    onPullingUp() {
       this.page++
       this.getList()
     },
 
     // 格式化数据
     // 时间转换
-    formatData (data = []) {
+    formatData(data = []) {
       data.forEach(item => {
         item.create_at_format = moment(item.create_at).fromNow()
         item.last_reply_at_format = moment(item.last_reply_at).fromNow()
@@ -99,7 +99,7 @@ export default {
       return data
     },
 
-    toDetail (item) {
+    toDetail(item) {
       this.$router.push({
         name: 'detail',
         params: { id: item.id }
@@ -108,7 +108,8 @@ export default {
   },
   watch: {
     '$route.params.type': {
-      handler () {
+      handler(v) {
+        this.type = v
         this.getList()
       },
       immediate: true
@@ -129,7 +130,7 @@ export default {
         // display block
         padding 8px 16px
         border-bottom 1px solid rgba(0,0,0,0.08)
-        
+
         // -webkit-tap-highlight-color #ccc
 
         .item-header
