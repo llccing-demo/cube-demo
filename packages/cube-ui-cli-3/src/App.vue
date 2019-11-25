@@ -1,19 +1,46 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Drawer class="drawer" :show="show" :class="{active: show}"></Drawer>
+    <router-view class="content-box" :class="{'hide-drawer': !show}" />
   </div>
 </template>
 
+<script>
+import Drawer from './components/Drawer'
+import Bus from './Bus'
+export default {
+  name: 'app',
+  components: {
+    Drawer
+  },
+  data () {
+    return {
+      show: false
+    }
+  },
+  mounted () {
+    Bus.$on('toggle-drawer', (v) => {
+      this.show = v
+    })
+  }
+}
+</script>
 <style lang="stylus">
 #app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
+  font-size 14px
+  height 100vh
+  .drawer
+    position fixed
+    top 0
+    bottom 0
+    left -270px
+    transition all .3s ease-in-out
+  .drawer.active
+    left 0
+  .content-box
+    position absolute
+    left 270px
+    transition all .3s ease-in-out
+  .hide-drawer
+    left 0
 </style>
